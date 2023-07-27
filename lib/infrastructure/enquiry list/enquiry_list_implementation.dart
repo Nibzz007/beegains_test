@@ -48,5 +48,6 @@ class EnquiryList {
     } catch (e) {
       throw Exception(e);
     }
+    return null;
   }
 }

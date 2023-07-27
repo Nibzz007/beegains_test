@@ -9,7 +9,7 @@ part 'enquiry_state.dart';
 class EnquiryBloc extends Bloc<EnquiryEvent, EnquiryState> {
   EnquiryBloc() : super(EnquiryInitial()) {
     on<EnquiryEvent>((event, emit) {
-      // TODO: implement event handler
+      
     });
 
     on<InitialEvent>(intialEvent);

@@ -62,8 +62,8 @@ class _EnquiryListScreenState extends State<EnquiryListScreen> {
               child: CircularProgressIndicator(),
             );
           } else if (state is ErrorState) {
-            return const Text("something went wrong");
-          } else {
+            return const Text("Something went wrong");
+          } else if (state is SuccessState) {
             return SingleChildScrollView(
               child: Padding(
                 padding:
@@ -77,19 +77,22 @@ class _EnquiryListScreenState extends State<EnquiryListScreen> {
                         return Container(
                           color: kBlue,
                           height: height * 0.15,
-                          child: const Padding(
-                            padding: EdgeInsets.all(8.0),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(''),
+                                Text(state.data!.data.enquiries.data[index]
+                                    .enquiryNo),
                                 kHeight5,
                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text('Owner name'),
-                                    Text('Mobile number')
+                                    Text(state.data!.data.enquiries.data[index]
+                                        .rcOwnerName),
+                                    Text(state.data!.data.enquiries.data[index]
+                                        .rcOwnerPrimaryMobile)
                                   ],
                                 ),
                                 kHeight5,
@@ -97,10 +100,13 @@ class _EnquiryListScreenState extends State<EnquiryListScreen> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text('District'),
+                                    Text(state.data!.data.enquiries.data[index]
+                                        .district),
                                     kWidth90,
-                                    Text('vehicle make'),
-                                    Text('Model')
+                                    Text(state.data!.data.enquiries.data[index]
+                                        .vehicleMake.make),
+                                    Text(state.data!.data.enquiries.data[index]
+                                        .vehicleModel.model)
                                   ],
                                 ),
                               ],
@@ -113,12 +119,14 @@ class _EnquiryListScreenState extends State<EnquiryListScreen> {
                           height: 15,
                         );
                       },
-                      itemCount: 10,
+                      itemCount: state.data!.data.enquiries.data.length,
                     ),
                   ],
                 ),
               ),
             );
+          } else {
+            return Container();
           }
         },
       ),

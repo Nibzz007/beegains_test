@@ -22,79 +22,80 @@ class LoginScreen extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(15),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              kHeight100,
-              Text(
-                'Login',
-                style: GoogleFonts.poppins(
-                  fontSize: width * 0.1,
-                  fontWeight: FontWeight.bold,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                kHeight100,
+                Text(
+                  'Login',
+                  style: GoogleFonts.poppins(
+                    fontSize: width * 0.1,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              kHeight80,
-              Form(
-                key: TextFormWidget.textFieldKey,
-                child: Column(
-                  children: [
-                    TextFormWidget(
-                      textEditingController: usernameController,
-                      keyboardType: TextInputType.text,
-                      cursorColor: kBlack,
-                      textAlign: TextAlign.left,
-                      labelText: 'E-mail Address',
-                      validator: (value) {
-                        if (value != "mohamed fayis") {
-                          return "Please Enter a Valid Username";
-                        }
-                        return null;
-                      },
-                    ),
-                    kHeight20,
-                    TextFormWidget(
-                        textEditingController: passwordController,
+                kHeight80,
+                Form(
+                  key: TextFormWidget.textFieldKey,
+                  child: Column(
+                    children: [
+                      TextFormWidget(
+                        textEditingController: usernameController,
                         keyboardType: TextInputType.text,
                         cursorColor: kBlack,
                         textAlign: TextAlign.left,
-                        obscureText: true,
-                        labelText: 'Password',
+                        labelText: 'E-mail Address',
                         validator: (value) {
-                          if (value != "123456") {
-                            return "Please Enter a Valid Password";
+                          if (value != "mohamed fayis") {
+                            return "Please Enter a Valid Username";
                           }
-                          return null;
-                        }),
+                        },
+                      ),
+                      kHeight20,
+                      TextFormWidget(
+                          textEditingController: passwordController,
+                          keyboardType: TextInputType.text,
+                          cursorColor: kBlack,
+                          textAlign: TextAlign.left,
+                          obscureText: true,
+                          labelText: 'Password',
+                          validator: (value) {
+                            if (value != "123456") {
+                              return "Please Enter a Valid Password";
+                            }
+                          }),
+                    ],
+                  ),
+                ),
+                kHeight50,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: ElevatedButtonWidget(
+                        onPressed: () async {
+                          bool isValid =
+                              TextFormWidget.textFieldKey.currentState!.validate();
+                          if (isValid) {
+                            LoginAuth.loginUser(
+                                password: passwordController.text,
+                                username: usernameController.text);
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => EnquiryListScreen(),
+                              ),
+                            );
+                          }
+                          passwordController.text;
+                          usernameController.text;
+                        },
+                        text: 'Login',
+                      ),
+                    ),
                   ],
                 ),
-              ),
-              kHeight50,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButtonWidget(
-                    onPressed: () async {
-                      await EnquiryList.getList();
-                      bool isValid =
-                          TextFormWidget.textFieldKey.currentState!.validate();
-                      if (isValid) {
-                        LoginAuth.loginUser(
-                            password: passwordController.text,
-                            username: usernameController.text);
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => EnquiryListScreen(),
-                          ),
-                        );
-                      }
-                      passwordController.text;
-                      usernameController.text;
-                    },
-                    text: 'Login',
-                  ),
-                ],
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
