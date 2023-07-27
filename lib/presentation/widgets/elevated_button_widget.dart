@@ -1,6 +1,5 @@
 import 'package:beegains_task/core/colors.dart';
 import 'package:flutter/material.dart';
-
 import '../../core/textstyle.dart';
 
 class ElevatedButtonWidget extends StatelessWidget {
@@ -17,10 +16,10 @@ class ElevatedButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor: kBlack,
+          backgroundColor: kBlack,
           shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
-      )),
+            borderRadius: BorderRadius.circular(20),
+          )),
       onPressed: onPressed,
       child: Text(
         text,

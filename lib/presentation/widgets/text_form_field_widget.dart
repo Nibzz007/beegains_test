@@ -3,18 +3,18 @@ import '../../core/colors.dart';
 import '../../core/textstyle.dart';
 
 class TextFormWidget extends StatelessWidget {
-  TextFormWidget({
-    super.key,
-    this.textEditingController,
-    this.labelText,
-    required this.keyboardType,
-    required this.cursorColor,
-    this.onChanged,
-    this.validator,
-    required this.textAlign,
-    this.prefixIcon,
-    this.obscureText = false
-  });
+  static GlobalKey<FormState> textFieldKey = GlobalKey();
+  TextFormWidget(
+      {super.key,
+      this.textEditingController,
+      this.labelText,
+      required this.keyboardType,
+      required this.cursorColor,
+      this.onChanged,
+      this.validator,
+      required this.textAlign,
+      this.prefixIcon,
+      this.obscureText = false});
 
   String? labelText;
   TextEditingController? textEditingController;
@@ -45,7 +45,7 @@ class TextFormWidget extends StatelessWidget {
         contentPadding: const EdgeInsets.all(18),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
-          borderSide: const BorderSide(color: kBlack)
+          borderSide: const BorderSide(color: kBlack),
         ),
       ),
     );
